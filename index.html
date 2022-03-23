@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Triger</title>
+  <style>
+    .emptyBlock {
+      width: 100%;
+      height: 100vh;
+      border-color: #343434;
+    }
+    .titleeffect{
+      -webkit-backface-visibility:hidden;
+      backface-visibility:hidden;
+      -webkit-transition:all .8s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+      transition:all .8s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+      -webkit-transition-property:opacity, -webkit-transform;
+      transition-property:opacity, -webkit-transform;
+      transition-property:transform, opacity;
+      transition-property:transform, opacity, -webkit-transform;
+      -webkit-transform:translateX(1.5rem);
+      transform:translateX(1.5rem);
+      display:inline-block;
+      position:relative;
+      opacity:0
+    }
+    .titleeffect__df{
+      display:inline-block;
+      opacity:0
+    }
+    .titleeffect__clone,.titleeffect__cover{
+      display:block;
+      overflow:hidden;
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%
+    }
+    .titleeffect__cover{
+      opacity:0.25
+    }
+    .titleeffect-visible{
+      -webkit-transform:translateX(0);
+      transform:translateX(0);
+      opacity:1
+    }
+    .titleeffect-animated .titleeffect__df{
+      opacity:1
+    }
+  </style>
+</head>
+<body>
+  <div class="emptyBlock"></div>
+  <div class="js-demo-section">
+    <span class="titleeffect">
+      <span class="titleeffect__df">lorem ipsum</span>
+    </span>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.create({
+      trigger: '.js-demo-section', //アニメーションが始まるトリガーとなる要素
+      start: 'top center',
+      end: 'bottom center',
+      toggleClass: {targets: ".titleeffect", className: "is-titleeffect-visible"}, //クラスをつけたり、外したりできる
+      once: true,
+      markers: true,
+  });
+  </script>
+</body>
+</html>
